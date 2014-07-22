@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IncludeReader", "IncludeReader\IncludeReader.vcxproj", "{8371C259-2229-4085-9B87-BF1848D30B51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release with symbols|Win32 = Release with symbols|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8371C259-2229-4085-9B87-BF1848D30B51}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8371C259-2229-4085-9B87-BF1848D30B51}.Debug|Win32.Build.0 = Debug|Win32
+		{8371C259-2229-4085-9B87-BF1848D30B51}.Release with symbols|Win32.ActiveCfg = Release with symbols|Win32
+		{8371C259-2229-4085-9B87-BF1848D30B51}.Release with symbols|Win32.Build.0 = Release with symbols|Win32
+		{8371C259-2229-4085-9B87-BF1848D30B51}.Release|Win32.ActiveCfg = Release|Win32
+		{8371C259-2229-4085-9B87-BF1848D30B51}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
