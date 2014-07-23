@@ -3,10 +3,7 @@
 
 #include "stdafx.h"
 
-#include <boost/graph/graph_traits.hpp>
-#include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/graphviz.hpp>
-#include <boost/graph/transitive_reduction.hpp>
 
 using namespace std::tr2::sys;
 using namespace std;
@@ -87,9 +84,9 @@ Vertex addVertex(Graph &_g, std::string &_file, string &_path);
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	vector<string> includePaths = {  };
+	vector<string> includePaths = { "" };
 
-	path currentPath();
+	path currentPath("");
 	int pathLength = currentPath.file_string().size();
 	int id = 0;
 	set<string> sourceExt = { ".cpp", ".h", ".c" };
