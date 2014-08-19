@@ -84,9 +84,54 @@ Vertex addVertex(Graph &_g, std::string &_file, string &_path);
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	vector<string> includePaths = { "" };
+	namespace po = boost::program_options;
 
-	path currentPath("");
+	po::options_description desc("Allowed options");
+	desc.add_options()
+		("help,h", "Display help")
+		("input-path,P", po::value<string>(), "Set the root of source files tree")
+		("include,I", po::value<vector<string>>(), "External include paths")
+		("output,O", po::value<string>(), "Output dot-file")
+		;
+
+	po::variables_map vm;
+	po::store(po::parse_command_line(argc, argv, desc), vm);
+	po::notify(vm);
+
+	if (vm.count("help") || vm.empty()) 
+	{
+		cout << desc << "\n";
+		return 1;
+	}
+
+	path currentPath;
+	if (vm.count("input-path") == 1)
+	{
+		currentPath = path(vm["input-path"].as<string>());
+		cout << "Root [input-path] is set to " << currentPath.file_string() << "\n";
+	}
+	else
+	{
+		cout << "One [input-path] parameter is required.\n";
+		return 1;
+	}
+
+	vector<string> includePaths;
+	if (vm.count("include"))
+		includePaths = vm["include"].as<vector<string>>();
+
+	string outputFile;
+	if (vm.count("output") == 1)
+	{
+		outputFile = vm["output"].as<string>();
+		cout << "Output is set to " << outputFile << "\n";
+	}
+	else
+	{
+		cout << "One [output] parameter is required.\n";
+		return 1;
+	}
+
 	int pathLength = currentPath.file_string().size();
 	int id = 0;
 	set<string> sourceExt = { ".cpp", ".h", ".c" };
@@ -187,7 +232,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	std::cout << "Building graph: " << time_spent << endl;
 
 	VertexWriter<Graph> writer(g);
-	ofstream outf("trepair.dot");
+	ofstream outf(outputFile);
 
 	clock_t time3 = clock();
 	boost::write_graphviz(outf, g, writer);
