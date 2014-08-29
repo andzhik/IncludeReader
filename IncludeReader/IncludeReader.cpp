@@ -12,12 +12,6 @@ typedef std::tuple<string, string, vector<string>> node_tuple;
 
 using namespace boost;
 
-typedef property<vertex_name_t, string,
-	property<vertex_index2_t, int,
-	property<vertex_root_t, string >> > VertexProperties;
-
-typedef property<edge_weight_t, int> EdgeWeightProperty;
-
 struct VertexProp
 {
 	string name;
@@ -25,13 +19,8 @@ struct VertexProp
 	int index;
 };
 
-struct EdgeProp
-{
-	int weight;
-};
-
 typedef adjacency_list<vecS, vecS, directedS,
-	VertexProp, EdgeProp> Graph;
+	VertexProp> Graph;
 
 typedef graph_traits<Graph>::vertex_descriptor Vertex;
 
@@ -240,11 +229,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	time_spent = (double)(time3 - time2) / CLOCKS_PER_SEC;
 	std::cout << "Outputting graph: " << time_spent << endl;
 
-	//boost::write_graphviz(outf, g);
-
 	return 0;
 }
-
 
 Vertex addVertex(Graph &_g, std::string &_file, string &_path)
 {
