@@ -224,7 +224,21 @@ int _tmain(int argc, _TCHAR* argv[])
 	ofstream outf(outputFile);
 
 	clock_t time3 = clock();
-	boost::write_graphviz(outf, g, writer);
+
+	Graph TR;
+
+	typedef property_map<Graph, vertex_index_t>::const_type VertexIndexMap;
+	VertexIndexMap index_map = get(vertex_index, g);
+
+	typedef graph_traits<Graph>::vertex_descriptor tr_vertex;
+	std::vector<tr_vertex> to_tr_vec(num_vertices(g));
+	iterator_property_map < tr_vertex *, VertexIndexMap, tr_vertex, tr_vertex&> g_to_tr_map(&to_tr_vec[0], index_map);
+
+	boost::transitive_reduction_mutgr(g, TR, g_to_tr_map, index_map);
+
+	boost::write_graphviz(outf, TR, writer);
+
+	outf.close();
 
 	time_spent = (double)(time3 - time2) / CLOCKS_PER_SEC;
 	std::cout << "Outputting graph: " << time_spent << endl;
