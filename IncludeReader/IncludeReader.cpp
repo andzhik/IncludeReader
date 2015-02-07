@@ -237,8 +237,25 @@ int _tmain(int argc, _TCHAR* argv[])
 	boost::transitive_reduction_mutgr(g, TR, g_to_tr_map, index_map);
 
 	boost::write_graphviz(outf, TR, writer);
-
 	outf.close();
+
+	std::vector<graph_traits<Graph>::vertex_descriptor> v1(), v2();
+
+	property_map<Graph, vertex_index_t>::type
+		v1_index_map = boost::get(vertex_index, g),
+		v2_index_map = boost::get(vertex_index, TR);
+
+	graph_traits<Graph>::vertex_iterator i, end;
+	int id = 0;
+	for (boost::tie(i, end) = boost::vertices(g); i != end; ++i, ++id) {
+		put(v1_index_map, *i, id);
+		v1[id] = *i;
+	}
+	id = 0;
+	for (boost::tie(i, end) = boost::vertices(TR); i != end; ++i, ++id) {
+		put(v2_index_map, *i, id);
+		v2[id] = *i;
+	}
 
 	time_spent = (double)(time3 - time2) / CLOCKS_PER_SEC;
 	std::cout << "Outputting graph: " << time_spent << endl;
